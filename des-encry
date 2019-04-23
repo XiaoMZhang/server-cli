@@ -235,16 +235,36 @@ int main() {
     int i;
 	begintime=clock();
     if (mode == 'e') {  
+        const char *pFileName = "des-encry.txt";
+	FILE * pFile;
+	pFile = fopen(pFileName, "a+");
+	if(NULL == pFile)
+	{
+		printf("error");
+	}
+	fprintf(pFile,"%s\n",msg);
         for (i = 0; msg[i]; i += 8) {  
-            DES(msg + i, ENCODE); // 加密  
-            printf("%s", res);  
-        }  
-    } else if (mode == 'd') {  
+            DES(msg + i, ENCODE);  
+	    fprintf(pFile, "%s",res);
+        } 
+	fprintf(pFile, "\n");
+	fclose(pFile);
+    } else if (mode == 'd') {
+    const char *pFileName = "des-decry.txt";
+	FILE * pFile;
+	pFile = fopen(pFileName, "a+");
+	if(NULL == pFile)
+	{
+		printf("error");
+	}
+	fprintf(pFile,"%s\n",msg);
         for (i = 0; msg[i]; i += 16) {  
             dropMsg(res, msg + i); // 将密文转换为真正的密文  
             DES(res, DECODE); // 解密  
-            printf("%s", res);  
+            fprintf(pFile,"%s", res);  
         }  
+	fprintf(pFile, "\n");
+	fclose(pFile);
     } else {  
         printf("Input Error!!!");  
     }  
