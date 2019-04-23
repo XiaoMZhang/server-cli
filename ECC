@@ -236,7 +236,7 @@ void get_generetor_class()
 
 //task2:倍点运算的递归算法
 
-Point timesPiont(int k,Point p0
+Point timesPiont(int k,Point p0)
 {
 	if(k==1){
 		return p0;
